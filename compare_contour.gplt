@@ -1,0 +1,85 @@
+#!/usr/bin/env gnuplot
+set terminal postscript eps  lw 1.5 color "Times, 20"
+set style fill transparent solid 10 border
+set size  1,0.975
+set encoding utf8 
+
+set xlabel "{/Times-Italic m_a} [eV]"  offset 0,0.4 font 'Times,27,Bold'
+set ylabel  "{/Italic g_{/Times-Italic a{/Symbol g}}} [GeV^-^1]" offset 1.5,0   font 'Times,27,Bold'
+set xrange [1e-13:1e-6]
+set yrange [1e-13:1e-9]
+set xtics  offset 0,0.2  font 'Times,17,Bold' 
+set ytics  offset 0.6,0  font 'Times,17,Bold' 
+set logscale x
+set logscale y
+set format x "10^{%L}"
+set format y "10^{%L}"
+#set key center at 2.8e-7, 4e-11
+#set key box
+#set key height 0.3
+set key right bottom
+set key spacing 1.05
+set key height 0.1
+set key reverse
+set key Left
+set key font "Times,15"
+
+#set output "fig_compare_contour_1.eps"
+set output "fig_compare_contour_2.eps"
+
+
+#DM
+#2.11878532613e-11  1e-13
+#1e-06  2.32183317418e-11
+set arrow from 2.11878532613e-11  ,1e-13 to 1e-06 , 2.32183317418e-11 lw 1.5 dt 2 lc -1 nohead
+set label  "ALP dark matter" at graph 0.62,0.22  front tc rgb "black" font "Times,22,Bold" rotate by 31.5
+
+set label  "CAST" at graph 0.06,0.86  front tc rgb "white" font "Times,22,Bold"
+set label  "SHAFT" at graph 0.36,0.86  front tc rgb "white" font "Times,22,Bold"
+set label  "ABRA\n10 cm" at graph 0.565,0.86  front tc rgb "white" font "Times,22,Bold"
+set label  "Mrk 421" at graph 0.658,0.682  front tc rgb "white" font "Times,15,Bold"
+set label  "(ARGO-YBJ+MAGIC+{/Times-Italic Fermi}-LAT)" at graph 0.54,0.648  front tc rgb "white" font "Times,13,Bold"
+set label  "NGC 1275\n({/Times-Italic Fermi}-LAT)" at graph 0.532,0.488  front tc rgb "white" font "Times,12,Bold"
+
+set label  "Diffuse SN" at graph 0.03,0.678  front tc rgb "white" font "Times,14,Bold"
+set label  "{/Times-Italic Fermi}-LAT SNe-{/Symbol g}" at graph 0.03,0.627  front tc rgb "white" font "Times,14,Bold"
+set label  "Hydra-A" at graph 0.03,0.55  front tc rgb "white" font "Times,14,Bold"
+set label  "Super star clusters" at graph 0.03,0.43  front tc rgb "white" font "Times,14,Bold"
+set label  "M87" at graph 0.03,0.35  front tc rgb "white" font "Times,14,Bold"
+set label  "NGC 1275 (Chandra)" at graph 0.03,0.26  front tc rgb "white" font "Times,14,Bold"
+set label  "SN distance ladder" at graph 0.03,0.189  front tc rgb "white" font "Times,12,Bold"
+set label  "SN1987A-{/Symbol g}" at graph 0.414,0.45  front tc rgb "white" font "Times,11,Bold"
+
+set label  "4C+21.35" at graph 0.64,0.505  front tc rgb "#CD0000" font "Times,14,Bold" rotate by 31.5
+set label  "H.E.S.S." at graph 0.801,0.564  front tc rgb "#A0522D" font "Times,10,Bold" rotate by 31.5
+
+
+set multiplot layout 1,1
+set origin 0.01,-0.03
+#==========================================plot======================
+plot "data/SN1987A_gamma.txt" u 1:2 with filledcurves  lc 6 notitle,\
+"mrk421/HESS1.dat" u 1:2 with filledcurves  lc rgb "#A0522D"  notitle "H.E.S.S." ,\
+"mrk421/Fermi_1.dat" u 1:2 with filledcurves  lc rgb "#DEB887" notitle "{/Times-Italic Fermi}-LAT",\
+"mrk421/Fermi_2.dat" u 1:2 with filledcurves  lc rgb "#ffffff" notitle "{/Times-Italic Fermi}-LAT",\
+"data/SN_distances.txt" u 1:2 with filledcurves  lc 6 notitle,\
+"data/Chandra_NGC1275.txt" u 1:2 with filledcurves  lc 3 notitle,\
+"data/Chandra_M87.txt" u 1:2 with filledcurves  lc 2 notitle,\
+"data/Xray-SuperStarClusters.txt" u 1:2 with filledcurves  lc 3 notitle,\
+"data/Chandra_HYDRA_A.txt" u 1:2 with filledcurves  lc 6 notitle,\
+"data/SNe-gamma.txt" u 1:2 with filledcurves  lc 2 notitle,\
+"data/DSNALP.txt" u 1:2 with filledcurves  lc 6 notitle,\
+"mrk421/421_argo+fermi.dat" u 1:2 with filledcurves  lc rgb "#FF7F24" notitle "Mrk 421  ARGO-YBJ + {/Times-Italic Fermi}-LAT" ,\
+"mrk421/421_magic+fermi.dat" u 1:2 with filledcurves  lc rgb "#BC8F8F" notitle "Mrk 421  MAGIC + {/Times-Italic Fermi}-LAT" ,\
+"mrk421/cast.dat" u 1:2 with filledcurves  lc rgb "#8B0000" notitle ,\
+"data/SHAFT.txt" u 1:2 with filledcurves  lc rgb "#D2691E" notitle,\
+"data/ABRACADABRA_run2.txt" u 1:2 with filledcurves  lc rgb "#CD0000" notitle,\
+"4c+21.35.dat" u 1:2 w l dt 1 lw 2 lc rgb "#CD0000" notitle ,\
+"4c+21.35_02G.dat" u 1:2 w l dt 4 lw 2 lc rgb "black" notitle ,\
+"4c+21.35_03R.dat" u 1:2 w l dt 2 lw 2 lc rgb "blue" notitle ,\
+
+
+
+
+
+ 
+
